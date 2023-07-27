@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id();  //iid primary key
+            $table->string('name', 50);
+            $table->date('date_of_birth');
+            $table->boolean('status')->default(1)->comment('1:active,0:Inactive');
+            $table->timestamps();  //created_at and updated_at.
         });
     }
 
