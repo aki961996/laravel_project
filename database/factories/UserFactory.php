@@ -22,8 +22,6 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'status' => $this->faker->randomElement([1,0]), // Generates either 0 or 1
-
-
         ];
     }
 
