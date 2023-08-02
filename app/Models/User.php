@@ -56,14 +56,19 @@ class User extends Authenticatable
     }
 
 
-    // accser
-    public function getDateOfBirthAttribute($value)  //camel case ezhuthicha date of birth denote cheyum
+    // // accser
+    // public function getDateOfBirthAttribute($value)  //camel case ezhuthicha date of birth denote cheyum
+    // {
+    //     return date('d-m-Y', strtotime($value));
+    // }
+
+    // date_od_birth change  acceser
+    public function setDateOfBirthAttribute($value)
     {
-        return date('d-m-Y', strtotime($value));
+        $this->attributes['date_of_birth'] = date('Y-m-d', strtotime($value));
     }
 
     //appending
-
     public function getStatusTextAttribute()
     {
         if ($this->status == 1) return 'Active';

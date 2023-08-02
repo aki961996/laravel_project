@@ -1,10 +1,9 @@
 @extends('layouts/master')
-@section('title','home')
+@section('title','Investors')
 @section('content')
-<h2>users</h2>
 
 <div class="d-flex justify-content-end mb-2 px-2">
-    <a href="{{route('user.add')}}" class="btn btn-info ">Add User</a>
+    <a href="{{route('client.add')}}" class="btn btn-dark ">Add User</a>
 </div>
 <div class="mt-2">
     @if($msg= Session::get('success'))
@@ -18,18 +17,26 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
             </tr>
+
+
         </thead>
         <tbody>
-            @foreach ($user as $users)
+            @foreach ($client as $clients)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
-                <td>{{$users->name}}</td>
-                <td>{{$users->email}}</td>
+                <td>{{$clients->first_name}}</td>
+                <td>{{$clients->email}}</td>
+                <td>{{$clients->phone_number}}</td>
+                <td>{{$clients->status}}</td>
+                <td>{{$clients->created_at}}</td>
                 <td>
-                    <a href="{{route('edit-user',encrypt($users->user_id))}}" class="btn btn-primary">Edit</a>
-                    <a href="{{route('delete-user',encrypt($users->user_id))}}" class="btn btn-danger">Delete</a>
+                    <a href="" class=""><i class="bi bi-pencil"> </i> </a>
+                    <a href="" class=""><i class="bi bi-trash3"></i></a>
                 </td>
             </tr>
 

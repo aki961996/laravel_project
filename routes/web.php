@@ -19,15 +19,34 @@ use App\Http\Controllers\frondEndController;
 // });
 
 
-route::get('/', [frondEndController::class, 'homePage'])->name('home');
+Route::get('/', [frondEndController::class, 'homePage'])->name('home');
 
-route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
+Route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
 
-route::get('contact', [frondEndController::class, 'contactPage'])->name('contact');
+Route::get('contact', [frondEndController::class, 'contactPage'])->name('contact');
+// Route::get('loans', [frondEndController::class, 'loanPage'])->name('loan');
 
 
 //add
-route::get('user-add', [frondEndController::class, 'userAdd'])->name('user.add');
+Route::get('user-add', [frondEndController::class, 'userAdd'])->name('user.add');
 
 //add post
 Route::post('save-user', [frondEndController::class, 'store'])->name('save.user');
+
+//eidt
+Route::get('edit-user/{user_id}', [frondEndController::class, 'editUser'])->name('edit-user');
+
+//update
+
+Route::post('update-user', [frondEndController::class, 'updateUser'])->name('update.user');
+
+//delet user
+Route::get('delete-user/{user_id}', [frondEndController::class, 'deleteUser'])->name('delete-user');
+
+
+Route::get('investors', [frondEndController::class, 'investorsPage'])->name('user.investors');
+
+//cleent add
+Route::get('investorsAdd', [frondEndController::class, 'investorsAdd'])->name('client.add');
+
+Route::post('investorsStore', [frondEndController::class, 'investorsStore'])->name('client.store');

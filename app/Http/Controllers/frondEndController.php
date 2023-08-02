@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;  // Import the User class
-use App\Http\Requests\StorePostRequest;
+use App\Models\User;
+use App\Models\Client;
 
-// use Illuminate\Http\StorePostRequest;
+// Import the User class
+
+use Illuminate\Http\StorePostRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class frondEndController extends Controller
 {
@@ -14,6 +18,7 @@ class frondEndController extends Controller
     //read
     public function homePage()
     {
+        //active users mathrem eduthitulu 
         //$user = User::all();
         $user = User::find(123);
         $user = User::where('user_id', 123)->first();
@@ -30,7 +35,7 @@ class frondEndController extends Controller
     }
 
     //addpost
-    public function store(StorePostRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
 
         // $validatedData = $request->validate([
@@ -45,23 +50,63 @@ class frondEndController extends Controller
         // ]);
 
         // Retrieve the validated input data...
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'date_of_birth' => 'required|date',
+            'status' => 'required',
+        ]);
 
-        $validated = $request->validated();
 
-        $validated = $request->safe()->only(['name', 'email']);
-
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'date_of_birth' => $validated['date_of_birth'],
-            'status' => $validated['status'],
+        User::create([
+            'name' => request('name'),
+            'email' =>   request('email'),
+            'date_of_birth' => request('date_of_birth'),
+            'status' => request('status')
 
         ]);
-        return ($user);
-
+        // return ($user);
         return redirect()->route('home')->with('success', 'user added successfully');
     }
 
+    //edit
+    public function editUser($user_id)
+    {
+        // return $user_id;
+        $user = User::find(decrypt($user_id));
+        //return $user;
+        return view('user/edit', ['user' => $user]);
+    }
+
+    //update user
+    public function updateUser()
+    {
+        //user id get cheyth
+        $user_id = request('user_id');
+        //then userid decrypt cheyth
+        $user_id = decrypt(($user_id));
+        // ah id vach data motham eduth
+        $user = User::find($user_id);
+        $user->update([
+            'name' => request('name'),
+            'email' =>   request('email'),
+            'date_of_birth' => request('date_of_birth'),
+            'status' => request('status')
+
+        ]);
+
+        return redirect()->route('home')->with('success', 'user updated successfully');
+    }
+
+    //delete user
+    public function deleteUser($user_id)
+    {
+
+        $user_id = decrypt(($user_id));
+        $user = User::find($user_id);
+        $user->delete();
+        return redirect()->route('home')->with('success', 'User deleted successfully');
+    }
 
     public function aboutPage()
     {
@@ -70,5 +115,54 @@ class frondEndController extends Controller
     public function contactPage()
     {
         return view("contact");
+    }
+
+    //users
+    public function investorsPage()
+    {
+
+        // $user = User::where('user_id', 123)->first();
+        $client = Client::active()->latest()->limit(10)->get();
+        //return $client;
+        return view('user/investorsList', ['client' => $client]);
+    }
+
+    public function investorsAdd()
+    {
+        return view('user/clientAdd');
+    }
+
+
+    public function investorsStore(Request $request): RedirectResponse
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'Street' => 'required',
+            'apartment' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip_code' => 'required',
+            'status' => 'required',
+        ]);
+        Client::create([
+
+            'first_name' => request('name'),
+            'last_name' => request('lname'),
+            'email' => request('email'),
+            'phone_number' => request('phone_number'),
+            'Street' => request('Street'),
+            'apartment' => request('apartment'),
+            'city' => request('city'),
+            'State' => request('state'),
+            'zip_code' => request('zip_code'),
+            'status' => request('status'),
+        ]);
+
+
+        return redirect()->route('user.investors')->with('success', 'Investor added successfully');
     }
 }
