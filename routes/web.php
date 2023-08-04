@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frondEndController;
+use App\Http\Controllers\TodoController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,9 @@ Route::get('/', [frondEndController::class, 'homePage'])->name('home');
 Route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
 
 Route::get('contact', [frondEndController::class, 'contactPage'])->name('contact');
+
+Route::get('todo', [TodoController::class, 'myTodo'])->name('todo');
+
 // Route::get('loans', [frondEndController::class, 'loanPage'])->name('loan');
 
 
@@ -50,3 +56,19 @@ Route::get('investors', [frondEndController::class, 'investorsPage'])->name('use
 Route::get('investorsAdd', [frondEndController::class, 'investorsAdd'])->name('client.add');
 
 Route::post('investorsStore', [frondEndController::class, 'investorsStore'])->name('client.store');
+
+Route::get('investorEdit/{client_id}', [frondEndController::class, 'investorEdit'])->name('investor.edit');
+
+
+//ajax route
+Route::post('update-invoster', [frondEndController::class, 'updateInvoster'])->name('update.invoster');
+
+
+
+
+Route::get('delete-investor/{client_id}', [frondEndController::class, 'deleteInverstor'])->name('investor.delete');
+
+
+
+//todo
+Route::get('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.task');

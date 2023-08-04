@@ -9,7 +9,7 @@
 <div class="mt-2">
     @if($msg= Session::get('success'))
     <div class="alert alert-success">
-        <p>{{ $msg }}</p>
+        <p class="mb-0">{{ $msg }}</p>
     </div>
     @endif
     <table class="table">

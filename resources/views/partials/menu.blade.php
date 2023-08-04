@@ -27,6 +27,9 @@
                     <a class="dropdown-item" href="#">Vendors </a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route ('todo')}}">Todo</a>
+            </li>
             {{-- <li class="nav-item">
                 <a class="nav-link disabled">Disabled</a>
             </li> --}}

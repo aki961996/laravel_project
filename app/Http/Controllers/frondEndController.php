@@ -165,4 +165,41 @@ class frondEndController extends Controller
 
         return redirect()->route('user.investors')->with('success', 'Investor added successfully');
     }
+
+    public function investorEdit($client_id)
+    {
+        $client_id = Client::find(decrypt($client_id));
+        // return $client_id;
+        return view('user/invosterEdit', ['client' => $client_id]);
+    }
+
+    public function updateInvoster()
+    {
+        $client_id = request('client_id');
+        $client_id = decrypt($client_id);
+        $allData = Client::find($client_id);
+        //return $allData;
+        $allData->update([
+            'first_name' => request('name'),
+            'last_name' =>   request('lname'),
+            'email' => request('email'),
+            'phone_number' => request('phone_number'),
+            'status' => request('status'),
+
+        ]);
+        return redirect()->route('user.investors')->with('success', 'Investor Updated successfully');
+    }
+
+    public function deleteInverstor()
+    {
+        $client_id = request('client_id');
+        $client_id = decrypt($client_id);
+        $client_id = Client::find($client_id);
+        // return $client_id;
+        $client_id->delete();
+        return redirect()->route('user.investors')->with('success', 'Investor Deleteds successfully');
+    }
+
+    //todo 
+   
 }

@@ -37,7 +37,7 @@
 
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-info btn-block">Add Data</button>
+            <button type="submit" class="btn btn-info btn-block">Edit Data</button>
             <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
         </div>
     </form>
