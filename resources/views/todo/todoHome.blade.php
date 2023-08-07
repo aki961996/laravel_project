@@ -33,10 +33,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+
                                 @foreach($todo as $todos)
                                 <tr class="fw-normal">
                                     <th>
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
+                                        @if ($todos->image)
+                                        <img src="{{ asset($todos->image) }}"  @endif
                                             class="shadow-1-strong rounded-circle" alt="avatar 1"
                                             style="width: 55px; height: auto;">
                                         <span class="ms-2">{{$todos->team_member}}</span>

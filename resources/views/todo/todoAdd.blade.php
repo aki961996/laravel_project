@@ -7,7 +7,7 @@
 
 <div class="container">
 
-    <form action="" method="POST" id="todo_add" name="todo_add">
+    <form action="{{route('todo.add')}}" method="POST" id="todo_add" name="todo_add">
         @csrf
 
 
@@ -28,12 +28,22 @@
 
             @enderror
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label>Priority</label>
             <input type="text" name="priority" class="form-control">
             @error('priority')
             <div class="alert-danger">{{$message}}</div>
 
+            @enderror
+        </div> --}}
+        <div class="form-group">
+            <label>status</label>
+            <select class="form-control" name="priority">
+                <option value="high priority">high priority</option>
+                <option value="low priority:">low priority:</option>
+            </select>
+            @error('priority')
+            <div class="alert-danger">{{$message}}</div>
             @enderror
         </div>
         {{-- image --}}
@@ -46,13 +56,6 @@
             <span class="alert-danger">{{ $message }}</span>
             @enderror
         </label>
-
-
-
-
-
-
-
 
         <div class="form-group">
             <button type="submit" class="btn btn-info btn-block">Add Data</button>

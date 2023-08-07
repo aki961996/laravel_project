@@ -21,7 +21,6 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
-
                 <th scope="col">Status</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Actions</th>
@@ -32,7 +31,7 @@
         <tbody>
             @foreach ($client as $clients)
             <tr>
-                <th scope="row">{{$loop->iteration}}</th>
+                <th scope="row">{{$client->firstItem() + $loop->index}}</th>
                 <td>{{$clients->first_name}}</td>
                 <td>{{$clients->last_name}}</td>
                 <td>{{$clients->email}}</td>
@@ -55,6 +54,9 @@
 
         </tbody>
     </table>
+    <div>
+        {{$client->links()}}
+    </div>
 
 </div>
 

@@ -11,6 +11,8 @@ use Illuminate\Http\StorePostRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class frondEndController extends Controller
 {
@@ -22,7 +24,10 @@ class frondEndController extends Controller
         //$user = User::all();
         $user = User::find(123);
         $user = User::where('user_id', 123)->first();
-        $user = User::active()->latest()->limit(10)->skip(5)->get();
+        $user = User::active()->latest()->paginate(7);
+        //$user = User::paginate(7);
+
+
         //return $user;
         return view('home', ['user' => $user]);
     }
@@ -122,7 +127,7 @@ class frondEndController extends Controller
     {
 
         // $user = User::where('user_id', 123)->first();
-        $client = Client::active()->latest()->limit(10)->get();
+        $client = Client::active()->latest()->paginate(7);
         //return $client;
         return view('user/investorsList', ['client' => $client]);
     }
@@ -201,5 +206,5 @@ class frondEndController extends Controller
     }
 
     //todo 
-   
+
 }

@@ -1,12 +1,13 @@
 @extends('layouts/master')
 @section('title','home')
 @section('content')
-<h2>users</h2>
+
 
 <div class="d-flex justify-content-end mb-2 px-2">
     <a href="{{route('user.add')}}" class="btn btn-info ">Add User</a>
 </div>
 <div class="mt-2">
+    <h2>User List</h2>
     @if($msg= Session::get('success'))
     <div class="alert alert-success">
         <p class="mb-0">{{ $msg }}</p>
@@ -24,7 +25,7 @@
         <tbody>
             @foreach ($user as $users)
             <tr>
-                <th scope="row">{{$loop->iteration}}</th>
+                <th scope="row">{{$user->firstItem() + $loop->index}}</th>
                 <td>{{$users->name}}</td>
                 <td>{{$users->email}}</td>
                 <td>
@@ -38,6 +39,11 @@
 
         </tbody>
     </table>
+
+    {{-- Pagination --}}
+    <div>
+        {!! $user->links() !!}
+    </div>
 
 </div>
 

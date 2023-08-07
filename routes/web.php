@@ -70,5 +70,6 @@ Route::get('delete-investor/{client_id}', [frondEndController::class, 'deleteInv
 
 
 
-//todo
-Route::get('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.task');
+//todo  work as pendimg
+Route::get('todoTask', [TodoController::class, 'todoTask'])->name('todo.task');
+Route::post('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.add');
