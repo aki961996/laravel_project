@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frondEndController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\BorrowerController;
+
 
 
 
@@ -73,3 +75,11 @@ Route::get('delete-investor/{client_id}', [frondEndController::class, 'deleteInv
 //todo  work as pendimg
 Route::get('todoTask', [TodoController::class, 'todoTask'])->name('todo.task');
 Route::post('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.add');
+
+
+//borrowers
+Route::group(['prefix' => 'users', 'namespace' => 'Frontend'], function () {
+    Route::get('borrowers', [BorrowerController::class, 'borrowers'])->name('user.borrowers');
+    Route::get('borrowersAdd', [BorrowerController::class, 'borrowersAdd'])->name('borrower.add');
+    Route::post('borrowersStore', [BorrowerController::class, 'borrowersStore'])->name('borrower.store');
+});

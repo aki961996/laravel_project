@@ -22,7 +22,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{route ('user.investors')}}">Investers</a>
-                    <a class="dropdown-item" href="#">Borrowers</a>
+                    <a class="dropdown-item" href="{{route('user.borrowers')}}">Borrowers</a>
                     <div class="dropdown-divider">Brokers</div>
                     <a class="dropdown-item" href="#">Vendors </a>
                 </div>

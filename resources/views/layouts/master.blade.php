@@ -38,6 +38,8 @@
 
     <script src="{{ asset('assets/js/script.js') }}" defer></script>
 
+    
+
 </body>
 
 </html>
