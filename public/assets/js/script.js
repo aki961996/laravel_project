@@ -17,21 +17,53 @@ $(function () {
                contentType: false,
                processData: false,
          
-                   success: (response) => {
-                    alert('Form submitted successfully');
-                        location.reload();
-                    window.location.href = 'borrowers'; 
-                },
+               // success: (response) => {
+                        
+               //      if (response.status === true) {
+                             
+               //       alert(response.success);
+               //        location.reload();
+               //      window.location.href = 'borrowers'; 
+               //  } else {
+               //      // Handle other success scenarios
+               //  }
+               //      // alert('Form submitted successfully');
+               //      //     location.reload();
+               //      // window.location.href = 'borrowers'; 
+               // },
+               
+                success: function (response) {
+        if (response.status === 'true') {
+            alert(response.success);
+             location.reload();
+              window.location.href = 'borrowers'; 
+        } else {
+            console.log('An error occurred.');
+        }
+    },
     
                    
              
                error: function (response) {
-                    // $('#ajax-form').find(".print-error-msg").find("ul").html('');
-                    // $('#ajax-form').find(".print-error-msg").css('display','block');
-                    // $.each( response.responseJSON.errors, function( key, value ) {
-                    //     $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-                    // });
-               }
+                   if (response.status === 422) {
+                    var errors = response.responseJSON.errors;
+
+                    // Clear previous error messages
+                    $('.print-error-msg').empty();
+
+                    $.each(errors, function (key, value) {
+                         var inputElement = $('[name="' + key + '"]');
+                      
+                         var errorContainer = inputElement.siblings('.print-error-msg');
+                     
+                         var errorMessages = value.join('<br>');
+                         
+                        errorContainer.html(errorMessages).css('display', 'block');
+                    });
+                } else {
+                    console.log('An error occurred.');
+                }
+                }
           });
       
      });

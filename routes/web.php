@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frondEndController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\BorrowerController;
+use App\Http\Controllers\LoginController;
+
+
 
 
 
@@ -25,6 +28,7 @@ use App\Http\Controllers\BorrowerController;
 
 
 Route::get('/', [frondEndController::class, 'homePage'])->name('home');
+Route::get('login', [LoginController::class, 'loginPage'])->name('login');
 
 Route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
 
@@ -75,7 +79,10 @@ Route::get('delete-investor/{client_id}', [frondEndController::class, 'deleteInv
 //todo  work as pendimg
 Route::get('todoTask', [TodoController::class, 'todoTask'])->name('todo.task');
 Route::post('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.add');
-
+//todoedit
+Route::get('todo-edit/{todo_id}', [TodoController::class, 'todoEdit'])->name('todo-edit');
+//todo-update
+Route::post('todo-update', [TodoController::class, 'todoUpdate'])->name('todo-update');
 
 //borrowers
 Route::group(['prefix' => 'users', 'namespace' => 'Frontend'], function () {
@@ -83,3 +90,5 @@ Route::group(['prefix' => 'users', 'namespace' => 'Frontend'], function () {
     Route::get('borrowersAdd', [BorrowerController::class, 'borrowersAdd'])->name('borrower.add');
     Route::post('borrowersStore', [BorrowerController::class, 'borrowersStore'])->name('borrower.store');
 });
+
+Route::get('q', [TodoController::class, 'qu']);

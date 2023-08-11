@@ -1,5 +1,5 @@
 @extends('layouts/master')
-@section('title','Todo Add')
+@section('title','Todo-Edit')
 @section('content')
 <div class="d-flex justify-content-end mb-2 px-2">
     <a href="{{route('todo')}}" class="btn btn-dark ">Back</a>
@@ -7,23 +7,24 @@
 
 <div class="container">
 
-    <form action="{{route('todo.add')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('todo-update')}}" method="post" enctype="multipart/form-data">
         @csrf
+
+        <div class="form-group">
+            <input type="hidden" name="todo_id" value="{{encrypt($todo->todo_id)}}" class="form-control">
+        </div>
+
+
         <div class="form-group">
             <label>Team Member</label>
-            <input type="text" name="team_member" class="form-control">
-            @error('team_member')
-            <div class="alert-danger">{{$message}}</div>
-            @enderror
+            <input type="text" value="{{$todo->team_member}}" name="team_member" class="form-control">
+
         </div>
 
         <div class="form-group">
             <label>Task</label>
-            <input type="text" name="task" class="form-control">
-            @error('task')
-            <div class="alert-danger">{{$message}}</div>
+            <input type="text" value="{{$todo->task}}" name="task" class="form-control">
 
-            @enderror
         </div>
         {{-- <div class="form-group">
             <label>Priority</label>
@@ -34,9 +35,10 @@
             @enderror
         </div> --}}
 
-        <div class="form-group">
+        <div class="form-group d-flex flex-column">
             <label>Image</label>
-            <input type="file" name="image" class="form-control">
+            <img style='width:100px;' src="{{ asset('storage/images/' . $todo->images) }}" alt="">
+            <input type="file"  name="image" class="form-control">
             @error('image')
             <div class="alert-danger">{{$message}}</div>
             @enderror
@@ -44,13 +46,11 @@
 
         <div class="form-group">
             <label>status</label>
-            <select class="form-control" name="priority">
+            <select class="form-control" value="{{$todo->priority}}" name="priority">
                 <option value="high priority">high priority</option>
                 <option value="low priority:">low priority:</option>
             </select>
-            @error('priority')
-            <div class="alert-danger">{{$message}}</div>
-            @enderror
+
         </div>
         {{-- image --}}
 
@@ -75,7 +75,7 @@
         </div> --}}
 
         <div class="form-group">
-            <button type="submit" class="btn btn-info btn-block">Submit</button>
+            <button type="submit" class="btn btn-info btn-block">Update</button>
             {{-- <button type="submit" class="btn btn-info btn-block">Add Data</button> --}}
 
         </div>

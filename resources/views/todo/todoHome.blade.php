@@ -12,6 +12,7 @@
     }
 </style>
 
+
 <section class="vh-100" style="background-color: #eee;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -22,13 +23,19 @@
                         <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Task List</h5>
                     </div>
                     <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
-
+                        @if($msg= Session::get('success'))
+                        <div class="alert alert-success">
+                            <p class="mb-0">{{ $msg }}</p>
+                        </div>
+                        @endif
                         <table class="table mb-0">
                             <thead>
                                 <tr>
+                                    <th scope="col">Image</th>
                                     <th scope="col">Team Member</th>
                                     <th scope="col">Task</th>
                                     <th scope="col">Priority</th>
+
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -37,13 +44,18 @@
 
                                 @foreach($todo as $todos)
                                 <tr class="fw-normal">
-                                    <th>
-                                        @if ($todos->image)
-                                        <img src="{{ asset($todos->image) }}"  @endif
-                                            class="shadow-1-strong rounded-circle" alt="avatar 1"
-                                            style="width: 55px; height: auto;">
+
+                                    {{-- <td class="align-middle">
+                                        <span class="ms-2">{{$todos->images}}</span>
+                                    </td> --}}
+
+                                    <td class="align-middle">
+                                        <img style='width:100px;' src="{{ asset('storage/images/' . $todos->images) }}"
+                                            alt="">
+                                    </td>
+                                    <td class="align-middle">
                                         <span class="ms-2">{{$todos->team_member}}</span>
-                                    </th>
+                                    </td>
                                     <td class="align-middle">
                                         <span>{{$todos->task}}</span>
                                     </td>
@@ -58,8 +70,8 @@
                                         </span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="#!" data-mdb-toggle="tooltip" title="Edit"><i
-                                                class="bi bi-check-lg"></i></a>
+                                        <a href="{{route('todo-edit',encrypt($todos->todo_id))}}"
+                                            data-mdb-toggle="tooltip" title="Edit"><i class="bi bi-check-lg"></i></a>
                                         <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
                                                 class="bi bi-trash3"></i></a>
                                     </td>
@@ -69,15 +81,21 @@
 
                     </div>
                     <div class="card-footer text-end p-3">
-                        <button class="me-2 btn btn-link">Cancel</button>
 
-                        <a href="{{route('todo.task',encrypt($todos->todo_id))}}" class="btn btn-primary">Add Task</a>
+
+                        <a href="{{route('todo.task')}}" class="btn btn-primary">Add Task</a>
                     </div>
                 </div>
-
+                {{-- pagenaton --}}
+                <div>
+                    {{$todo->links()}}
+                </div>
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 

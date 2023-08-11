@@ -13,10 +13,13 @@
                 <div class="col-6">
                     <label for="exampleInputEmail1">Firts Name </label>
                     <input type="text" name="first_name" class="form-control" placeholder="">
+                    <span class="text-danger print-error-msg" style="display:none;"></span>
                 </div>
                 <div class="col-6">
                     <label for="exampleInputEmail1">Last Name</label>
                     <input type="text" name="last_name" class="form-control" placeholder=" ">
+                    <span class="text-danger print-error-msg" style="display:none;"></span>
+
                 </div>
             </div>
             <div class="row">
@@ -30,16 +33,19 @@
                         <input class="form-check-input" name="gender" type="radio" id="female" value="female">
                         <label class="form-check-label" for="female">Female</label>
                     </div>
+                    <span class="text-danger print-error-msg" style="display:none;"></span>
                 </div>
                 <div class="col-6">
                     <label for="exampleInputEmail1">Date Of Birth</label>
                     <input name="date_of_birth" type="date" class="form-control">
+                    <span class="text-danger print-error-msg" style="display:none;"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <label for="exampleInputEmail1"> Mesage</label>
                     <textarea name="msg" class="form-control"></textarea>
+                    <span class="text-danger print-error-msg" style="display:none;"></span>
                 </div>
 
             </div>
@@ -53,7 +59,7 @@
                         <option>{{$bo->teams}}</option>
                         @endforeach
                     </select>
-
+                    <span class="text-danger print-error-msg" style="display:none;"></span>
                 </div>
 
             </div>

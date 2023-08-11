@@ -12,7 +12,7 @@
 
 
         <div class="form-group">
-            <label>Name</label>
+            <label>Name - {{session()->get('user_name')}}</label>
             <input type="text" name="name" class="form-control">
             @error('name')
             <div class="alert-danger">{{$message}}</div>

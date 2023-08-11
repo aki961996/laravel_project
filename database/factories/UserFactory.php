@@ -21,6 +21,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'password'=>bcrypt('learnmore'),
             'status' => $this->faker->randomElement([1,0]), // Generates either 0 or 1
         ];
     }

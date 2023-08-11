@@ -1,5 +1,5 @@
 @extends('layouts/master')
-@section('title','Investors')
+@section('title','Borrowers')
 @section('content')
 
 <div class="d-flex justify-content-end mb-2 px-2">
@@ -7,7 +7,7 @@
 </div>
 <div class="mt-2">
     <h1>Borrowers List</h1>
-    
+
     @if($msg= Session::get('success'))
     <div class="alert alert-success">
         <p class="mb-0">{{ $msg }}</p>
@@ -18,7 +18,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">firt Name</th>
+                <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Date Of Birth</th>

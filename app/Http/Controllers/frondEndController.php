@@ -26,9 +26,10 @@ class frondEndController extends Controller
         $user = User::where('user_id', 123)->first();
         $user = User::active()->latest()->paginate(7);
         //$user = User::paginate(7);
-
-
         //return $user;
+        session()->put('user_name', 'aki');
+        session()->put('user_id', 45);
+
         return view('home', ['user' => $user]);
     }
 
@@ -36,6 +37,9 @@ class frondEndController extends Controller
     //add
     public function userAdd()
     {
+
+        session()->get("user_name");
+
         return view('user/userAdd');
     }
 
@@ -90,6 +94,7 @@ class frondEndController extends Controller
         $user_id = request('user_id');
         //then userid decrypt cheyth
         $user_id = decrypt(($user_id));
+        // return $user_id;
         // ah id vach data motham eduth
         $user = User::find($user_id);
         $user->update([
@@ -174,7 +179,7 @@ class frondEndController extends Controller
     public function investorEdit($client_id)
     {
         $client_id = Client::find(decrypt($client_id));
-        // return $client_id;
+        //return $client_id;
         return view('user/invosterEdit', ['client' => $client_id]);
     }
 
