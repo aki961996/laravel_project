@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\UserAddress;
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -28,6 +31,7 @@ class User extends Authenticatable
         'status'
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,6 +52,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //relation ships to addresses
+    public function address(): HasOne
+    {
+        return $this->hasOne(UserAddress::class, 'user_id', 'user_id');
+        // return $this->hasOne(Addressee::class); //last parameeter is user model primarykery ann
+        //  return $this->hasOne(UserAddress::class);
+        // return $this->hasOne(UserAddress::class, 'user_id', 'user_id');
+    }
 
     //scop
     public function scopeActive($query)

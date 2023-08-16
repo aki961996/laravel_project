@@ -65,4 +65,32 @@ class BorrowerController extends Controller
             'status' => 'true',
         ]);
     }
+
+
+    public function borrowersEdit($borrowe_id)
+    {
+        $borrower_id = Borrower::find(decrypt($borrowe_id));
+        //return  $borrower_id;
+        return view('borrower/borrowerEdit', ['borrower' => $borrower_id]);
+    }
+    public function borrowersUpdate(Request $request)
+    {
+        // return $request->all();
+
+        $borrower_id = request('borrower_id');
+        $borrower_id = decrypt($borrower_id);
+        //single data
+        $borrower_data = Borrower::find($borrower_id);
+        //return $borrower_data;
+        $borrower_data->update([
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'gender' => request('gender'),
+            'date_of_birth' => request('date_of_birth'),
+            'msg' => request('msg'),
+            'teams' => request('team'),
+        ]);
+
+        return redirect()->route('user.borrowers')->with('success', 'Borrower Updated successfully');
+    }
 }

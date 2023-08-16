@@ -14,6 +14,8 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     {{-- icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    {{--
+    <link rel="stylesheet" href="{{asset('assets/css/menustyle.css')}}"> --}}
 </head>
 
 <body>
@@ -38,7 +40,7 @@
 
     <script src="{{ asset('assets/js/script.js') }}" defer></script>
 
-    
+
 
 </body>
 

@@ -9,6 +9,7 @@ use App\Models\Client;
 
 use Illuminate\Http\StorePostRequest;
 use App\Http\Controllers\Controller;
+use App\Models\UserAddress;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -207,9 +208,18 @@ class frondEndController extends Controller
         $client_id = Client::find($client_id);
         // return $client_id;
         $client_id->delete();
-        return redirect()->route('user.investors')->with('success', 'Investor Deleteds successfully');
+        return redirect()->route('user.investors')->with('success', 'Investor Deleted successfully');
     }
 
     //todo 
 
+    //view user
+    public function viewUser($user_id)
+    {
+
+        $user = User::find(decrypt($user_id));
+
+        // return $users;
+        return view('view/userView', ['user' => $user], ['user' => $user]);
+    }
 }

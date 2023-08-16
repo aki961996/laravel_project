@@ -4,6 +4,7 @@
 
 <body>
     <div class="container mt-5">
+
         <div class="d-flex justify-content-end mb-2 px-2">
             <a href="{{route('user.borrowers')}}" class="btn btn-dark ">Back</a>
         </div>

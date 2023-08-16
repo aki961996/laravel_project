@@ -1,80 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Sign In</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/floating-labels/">
+    <!-- Bootstrap core CSS -->
+    {{--
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>Document</title>
+
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4 offset-sm-4 mt-5">
-                <form>
-                    <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" />
+        <div class="row justify-content-end">
+            <div class="col-sm-5">
+                <h2 class="mb-4">Sign In</h2>
 
-                    </div>
+                <form action="{{route('do.login')}}" method="post" class="form-signin">
 
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" />
-                    </div>
-
-                    <!-- 2 column grid layout for inline styling -->
-                    <div class="row mb-4">
-                        <div class="col d-flex justify-content-center">
-                            <!-- Checkbox -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                <label class="form-check-label" for="form2Example31"> Remember me </label>
-                            </div>
+                    @csrf
+                    {{-- user invlid msg --}}
+                    <div>
+                        @if($msg= Session::get('message'))
+                        <div class="alert alert-danger">
+                            <p class="mb-0">{{ $msg }}</p>
                         </div>
-
-                        <div class="col">
-                            <!-- Simple link -->
-                            <a href="#!">Forgot password?</a>
+                        @endif
+                    </div>
+                    {{-- logout msg --}}
+                    <div>
+                        @if($msg= Session::get('logout'))
+                        <div class="alert alert-success">
+                            <p class="mb-0">{{ $msg }}</p>
                         </div>
+                        @endif
                     </div>
 
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-                    <!-- Register buttons -->
-                    <div class="text-center">
-                        <p>Not a member? <a href="#!">Register</a></p>
-                        <p>or sign up with:</p>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-google"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-github"></i>
-                        </button>
+                    <div class="form-label-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                        <label>Email address</label>
                     </div>
+
+                    <div class="form-label-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        <label>Password</label>
+                    </div>
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
                 </form>
             </div>
-
-
         </div>
+    </div>
+
+
 
 </body>
 
 </html>
-
-</div>

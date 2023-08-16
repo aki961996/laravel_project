@@ -27,68 +27,86 @@ use App\Http\Controllers\LoginController;
 // });
 
 
-Route::get('/', [frondEndController::class, 'homePage'])->name('home');
+
+//login
 Route::get('login', [LoginController::class, 'loginPage'])->name('login');
-
-Route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
-
-Route::get('contact', [frondEndController::class, 'contactPage'])->name('contact');
-
-Route::get('todo', [TodoController::class, 'myTodo'])->name('todo');
-
-// Route::get('loans', [frondEndController::class, 'loanPage'])->name('loan');
+Route::post('do-login', [LoginController::class, 'doLogin'])->name('do.login');
 
 
-//add
-Route::get('user-add', [frondEndController::class, 'userAdd'])->name('user.add');
+//
+Route::middleware(['login_verified'])->group(function () {
 
-//add post
-Route::post('save-user', [frondEndController::class, 'store'])->name('save.user');
+    Route::get('home', [frondEndController::class, 'homePage'])->name('home');
 
-//eidt
-Route::get('edit-user/{user_id}', [frondEndController::class, 'editUser'])->name('edit-user');
+    Route::get('do-logout', [LoginController::class, 'doLogout'])->name('do.logout');
+    Route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
+    Route::get('contact', [frondEndController::class, 'contactPage'])->name('contact');
+    Route::get('todo', [TodoController::class, 'myTodo'])->name('todo');
+    // Route::get('loans', [frondEndController::class, 'loanPage'])->name('loan');
 
-//update
-
-Route::post('update-user', [frondEndController::class, 'updateUser'])->name('update.user');
-
-//delet user
-Route::get('delete-user/{user_id}', [frondEndController::class, 'deleteUser'])->name('delete-user');
+    //userviewview-user
+    Route::get('viewUser/{user_id}', [frondEndController::class, 'viewUser'])->name('view-user');
 
 
-Route::get('investors', [frondEndController::class, 'investorsPage'])->name('user.investors');
+    //add
+    Route::get('user-add', [frondEndController::class, 'userAdd'])->name('user.add');
 
-//cleent add
-Route::get('investorsAdd', [frondEndController::class, 'investorsAdd'])->name('client.add');
+    //add post
+    Route::post('save-user', [frondEndController::class, 'store'])->name('save.user');
 
-Route::post('investorsStore', [frondEndController::class, 'investorsStore'])->name('client.store');
+    //eidt
+    Route::get('edit-user/{user_id}', [frondEndController::class, 'editUser'])->name('edit-user');
 
-Route::get('investorEdit/{client_id}', [frondEndController::class, 'investorEdit'])->name('investor.edit');
+    //update
 
+    Route::post('update-user', [frondEndController::class, 'updateUser'])->name('update.user');
 
-//ajax route
-Route::post('update-invoster', [frondEndController::class, 'updateInvoster'])->name('update.invoster');
-
-
-
-
-Route::get('delete-investor/{client_id}', [frondEndController::class, 'deleteInverstor'])->name('investor.delete');
+    //delet user
+    Route::get('delete-user/{user_id}', [frondEndController::class, 'deleteUser'])->name('delete-user');
 
 
+    Route::get('investors', [frondEndController::class, 'investorsPage'])->name('user.investors');
 
-//todo  work as pendimg
-Route::get('todoTask', [TodoController::class, 'todoTask'])->name('todo.task');
-Route::post('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.add');
-//todoedit
-Route::get('todo-edit/{todo_id}', [TodoController::class, 'todoEdit'])->name('todo-edit');
-//todo-update
-Route::post('todo-update', [TodoController::class, 'todoUpdate'])->name('todo-update');
+    //cleent add
+    Route::get('investorsAdd', [frondEndController::class, 'investorsAdd'])->name('client.add');
 
-//borrowers
-Route::group(['prefix' => 'users', 'namespace' => 'Frontend'], function () {
-    Route::get('borrowers', [BorrowerController::class, 'borrowers'])->name('user.borrowers');
-    Route::get('borrowersAdd', [BorrowerController::class, 'borrowersAdd'])->name('borrower.add');
-    Route::post('borrowersStore', [BorrowerController::class, 'borrowersStore'])->name('borrower.store');
+    Route::post('investorsStore', [frondEndController::class, 'investorsStore'])->name('client.store');
+
+    Route::get('investorEdit/{client_id}', [frondEndController::class, 'investorEdit'])->name('investor.edit');
+
+
+    //ajax route
+    Route::post('update-invoster', [frondEndController::class, 'updateInvoster'])->name('update.invoster');
+
+
+
+
+    Route::get('delete-investor/{client_id}', [frondEndController::class, 'deleteInverstor'])->name('investor.delete');
+
+
+
+    //todo  work as pendimg
+    Route::get('todoTask', [TodoController::class, 'todoTask'])->name('todo.task');
+    Route::post('todoAdd', [TodoController::class, 'todoAdd'])->name('todo.add');
+    //todoedit
+    Route::get('todo-edit/{todo_id}', [TodoController::class, 'todoEdit'])->name('todo-edit');
+    //todo-update
+    Route::post('todo-update', [TodoController::class, 'todoUpdate'])->name('todo-update');
+
+    //borrowers
+    Route::group(['prefix' => 'users', 'namespace' => 'Frontend'], function () {
+        Route::get('borrowers', [BorrowerController::class, 'borrowers'])->name('user.borrowers');
+        Route::get('borrowersAdd', [BorrowerController::class, 'borrowersAdd'])->name('borrower.add');
+        Route::post('borrowersStore', [BorrowerController::class, 'borrowersStore'])->name('borrower.store');
+        Route::get('borrowers-edit/{borrowe_id}', [BorrowerController::class, 'borrowersEdit'])->name('borrower.edit');
+        Route::post('borrowers-update', [BorrowerController::class, 'borrowersUpdate'])->name('borrower.update');
+    });
 });
 
+
+//
+
+
+
+//test route
 Route::get('q', [TodoController::class, 'qu']);
