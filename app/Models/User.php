@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+
 use App\Models\UserAddress;
+use App\Models\Order;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,15 +54,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    //relation ships to addresses
+    //relation ships to addresses user adress ayit hasone relation ship und
     public function address(): HasOne
     {
-        return $this->hasOne(UserAddress::class, 'user_id', 'user_id');
+        return $this->hasOne(UserAddress::class, 'user_id', 'user_id'); //lastone user_id is the users primery key
         // return $this->hasOne(Addressee::class); //last parameeter is user model primarykery ann
         //  return $this->hasOne(UserAddress::class);
         // return $this->hasOne(UserAddress::class, 'user_id', 'user_id');
     }
 
+    //hasmany
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id', 'user_id');
+    }
     //scop
     public function scopeActive($query)
     {

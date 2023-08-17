@@ -2,29 +2,10 @@
 @section('title','View')
 @section('content')
 
-<section style="background-color: #eee;">
-
-    <div class="container py-5">
-        {{-- <div class="container">
-            <ul>
-                <li>{{$user->name}}</li>
-                <li>{{$user->email}}</li>
-                <li>{{$user->date_of_birth_formated}}</li>
-                <li>{{$user->status_text}}</li>
-            </ul>
-            <hr>
-            <ul>
-                <li>{{$user->address->address_line_1}}</li>
-                <li>{{$user->address->city}}</li>
-                <li>{{$user->address->post_code}}</li>
-                <li>{{$user->address->state}}</li>
-            </ul>
-        </div> --}}
-
-
+<section>
+    <div class="container py-4">
         <div class="row">
-
-            <div class="col-lg-8">
+            <div class="col-lg-6  mt-5">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
@@ -32,7 +13,7 @@
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">J{{$user->name}}</p>
+                                <p class="text-muted mb-0">{{$user->name}}</p>
                             </div>
                         </div>
                         <hr>
@@ -47,7 +28,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Dob</p>
+                                <p class="mb-0">Date Of Birth</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">{{$user->date_of_birth_formated}}</p>
@@ -63,6 +44,7 @@
                             </div>
                         </div>
                         <hr>
+                        {{-- relation ship start --}}
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Address</p>
@@ -71,11 +53,69 @@
                                 <p class="text-muted mb-0">{{$user->address->address_line_1}}</p>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">City</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{$user->address->city}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">State</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{$user->address->state}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Post Code</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{$user->address->post_code}}</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+
+            </div>
+            <div class="col-lg-6 mt-5">
+
+                <table class="table">
+                    <h5>Orders</h5>
+                    <h3>This is the list of user Orders </h3>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($user->orders as $orders)
+                        <tr>
+                            <th scope="row">{{$orders->order_id}}</th>
+                            <td>{{$orders->price}}</td>
+                            <td>{{$orders->status_text}}</td>
+
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
 
             </div>
         </div>
     </div>
 </section>
+
+
 @endsection

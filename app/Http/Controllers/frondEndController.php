@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Client;
+use App\Models\UserAddress;
 
 // Import the User class
 
 use Illuminate\Http\StorePostRequest;
 use App\Http\Controllers\Controller;
-use App\Models\UserAddress;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -213,13 +214,11 @@ class frondEndController extends Controller
 
     //todo 
 
-    //view user
+    //view user this function relation ship 
     public function viewUser($user_id)
     {
 
         $user = User::find(decrypt($user_id));
-
-        // return $users;
-        return view('view/userView', ['user' => $user], ['user' => $user]);
+        return view('view/userView', ['user' => $user]);
     }
 }

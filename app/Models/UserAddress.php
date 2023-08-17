@@ -17,4 +17,8 @@ class UserAddress extends Model
         'post_code',
         'state',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
 }
