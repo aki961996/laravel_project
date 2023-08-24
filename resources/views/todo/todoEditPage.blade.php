@@ -38,7 +38,7 @@
         <div class="form-group d-flex flex-column">
             <label>Image</label>
             <img style='width:100px;' src="{{ asset('storage/images/' . $todo->images) }}" alt="">
-            <input type="file"  name="image" class="form-control">
+            <input type="file" name="image" class="form-control">
             @error('image')
             <div class="alert-danger">{{$message}}</div>
             @enderror
@@ -47,8 +47,10 @@
         <div class="form-group">
             <label>status</label>
             <select class="form-control" value="{{$todo->priority}}" name="priority">
-                <option value="high priority">high priority</option>
-                <option value="low priority:">low priority:</option>
+                <option value="high priority" @if($todo->priority == 'high priority') selected="selected" @endif>high
+                    priority</option>
+                <option value="low priority" @if($todo->priority == 'low priority') selected="selected" @endif>low
+                    priority</option>
             </select>
 
         </div>

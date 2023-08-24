@@ -17,11 +17,15 @@ class Order extends Model
         'status',
 
     ];
-    //appending
+    //appending evide condition und bcs 2 ans varam
     public function getStatusTextAttribute()
     {
         if ($this->status == 1) return 'Placed';
         else return 'Deliverd';
     }
+    
+
+
+
     protected $appends = ['status_text'];
 }

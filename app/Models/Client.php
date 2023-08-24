@@ -33,4 +33,9 @@ class Client extends Authenticatable
     {
         return $query->where('status', 1);
     }
+
+    public function postcode()
+    {
+        return $this->hasMany(UserAddress::class, 'user_id', 'client_id');
+    }
 }

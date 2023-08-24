@@ -47,7 +47,7 @@
                     <label>status</label>
                     <select class="form-control" name="priority">
                         <option value="high priority">high priority</option>
-                        <option value="low priority:">low priority:</option>
+                        <option value="low priority">low priority</option>
                     </select>
                     @error('priority')
                     <div class="alert-danger">{{$message}}</div>

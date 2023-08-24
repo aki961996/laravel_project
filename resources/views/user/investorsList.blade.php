@@ -36,6 +36,8 @@
                     <td>{{$clients->last_name}}</td>
                     <td>{{$clients->email}}</td>
                     <td>{{$clients->phone_number}}</td>
+
+
                     <td>{{$clients->status}}</td>
                     <td>{{$clients->created_at}}</td>
 

@@ -45,4 +45,9 @@ class Todo extends Model
         return $w;
         //   dd($this->getLastQuery());
     }
+
+    // public function scopeActive($query)
+    // {
+    //     return $query->where('priority', 'high priority');
+    // }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserCreatedEvent;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\UserAddress;
@@ -10,11 +11,13 @@ use App\Models\UserAddress;
 
 use Illuminate\Http\StorePostRequest;
 use App\Http\Controllers\Controller;
-
+use App\Mail\WelcomeEmail;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 
 class frondEndController extends Controller
 {
@@ -24,9 +27,9 @@ class frondEndController extends Controller
     {
         //active users mathrem eduthitulu 
         //$user = User::all();
-        $user = User::find(123);
-        $user = User::where('user_id', 123)->first();
-        $user = User::active()->latest()->paginate(7);
+        // $user = User::find(123);
+        // $user = User::where('user_id', 123)->first();
+        $user = User::withCount('orders')->active()->latest()->paginate(7);
         //$user = User::paginate(7);
         //return $user;
         session()->put('user_name', 'aki');
@@ -39,9 +42,8 @@ class frondEndController extends Controller
     //add
     public function userAdd()
     {
-
+        // Artisan::call('delete:inactive-users');
         session()->get("user_name");
-
         return view('user/userAdd');
     }
 
@@ -60,6 +62,8 @@ class frondEndController extends Controller
         //     'email.email' => 'Email field must be email address.'
         // ]);
 
+
+
         // Retrieve the validated input data...
         $request->validate([
             'name' => 'required|string|max:255',
@@ -69,14 +73,19 @@ class frondEndController extends Controller
         ]);
 
 
-        User::create([
+        $user = User::create([
             'name' => request('name'),
             'email' =>   request('email'),
             'date_of_birth' => request('date_of_birth'),
             'status' => request('status')
 
         ]);
-        // return ($user);
+
+        // Mail::to($user->email)
+        //     // ->cc('sajinjohn.bharathi@gmail.com')
+        //     ->send(new WelcomeEmail($user));
+        // // return ($user);
+        UserCreatedEvent::dispatch($user);
         return redirect()->route('home')->with('success', 'user added successfully');
     }
 
@@ -122,7 +131,7 @@ class frondEndController extends Controller
 
     public function aboutPage()
     {
-        return view("about");
+        return view("strip");
     }
     public function contactPage()
     {
@@ -161,7 +170,6 @@ class frondEndController extends Controller
             'status' => 'required',
         ]);
         Client::create([
-
             'first_name' => request('name'),
             'last_name' => request('lname'),
             'email' => request('email'),
@@ -173,7 +181,6 @@ class frondEndController extends Controller
             'zip_code' => request('zip_code'),
             'status' => request('status'),
         ]);
-
 
         return redirect()->route('user.investors')->with('success', 'Investor added successfully');
     }
@@ -218,7 +225,11 @@ class frondEndController extends Controller
     public function viewUser($user_id)
     {
 
+        //actully evide user model mathre vilikunnnulu so order ntem model data view lek kitan ah hasmany hasone cheythath
+
+
         $user = User::find(decrypt($user_id));
+        //return $user;
         return view('view/userView', ['user' => $user]);
     }
 }

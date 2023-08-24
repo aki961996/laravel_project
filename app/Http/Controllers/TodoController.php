@@ -95,8 +95,6 @@ class TodoController extends Controller
             $todo->update([
                 'team_member' => request('team_member'),
                 'task' =>   request('task'),
-                'images' => 'No Image',
-
                 'priority' => request('priority')
 
             ]);

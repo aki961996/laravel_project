@@ -29,7 +29,7 @@ use App\Http\Controllers\LoginController;
 
 
 //login
-Route::get('login', [LoginController::class, 'loginPage'])->name('login');
+Route::get('/', [LoginController::class, 'loginPage'])->name('login');
 Route::post('do-login', [LoginController::class, 'doLogin'])->name('do.login');
 
 
@@ -39,7 +39,7 @@ Route::middleware(['login_verified'])->group(function () {
     Route::get('home', [frondEndController::class, 'homePage'])->name('home');
 
     Route::get('do-logout', [LoginController::class, 'doLogout'])->name('do.logout');
-    Route::get('about', [frondEndController::class, 'aboutPage'])->name('about');
+    Route::get('stripe', [frondEndController::class, 'aboutPage'])->name('stripe');
     Route::get('contact', [frondEndController::class, 'contactPage'])->name('contact');
     Route::get('todo', [TodoController::class, 'myTodo'])->name('todo');
     // Route::get('loans', [frondEndController::class, 'loanPage'])->name('loan');
@@ -100,6 +100,7 @@ Route::middleware(['login_verified'])->group(function () {
         Route::post('borrowersStore', [BorrowerController::class, 'borrowersStore'])->name('borrower.store');
         Route::get('borrowers-edit/{borrowe_id}', [BorrowerController::class, 'borrowersEdit'])->name('borrower.edit');
         Route::post('borrowers-update', [BorrowerController::class, 'borrowersUpdate'])->name('borrower.update');
+        Route::get('borrowers-delete/{borrowe_id}', [BorrowerController::class, 'borrowersDelete'])->name('borrower.delete');
     });
 });
 

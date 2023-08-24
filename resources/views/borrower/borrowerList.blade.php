@@ -49,7 +49,8 @@
                                 class="bi bi-pencil">
                             </i>
                         </a>
-                        <a href="" class=""><i class="bi bi-trash3"></i></a>
+                        <a href="{{route('borrower.delete',encrypt($item->borrower_id))}}" class=""><i
+                                class="bi bi-trash3"></i></a>
                     </td>
                 </tr>
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
-
+use PhpParser\Builder\Use_;
 
 class BorrowerController extends Controller
 {
@@ -92,5 +92,11 @@ class BorrowerController extends Controller
         ]);
 
         return redirect()->route('user.borrowers')->with('success', 'Borrower Updated successfully');
+    }
+    public function borrowersDelete($borrowe_id)
+    {
+        $borrowe_id = Borrower::find(decrypt($borrowe_id));
+        $borrowe_id->delete();
+        return redirect()->route('user.borrowers')->with('success', 'Borrower Deleted successfully');
     }
 }

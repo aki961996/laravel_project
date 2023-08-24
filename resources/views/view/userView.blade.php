@@ -3,11 +3,13 @@
 @section('content')
 
 <section>
+
     <div class="container py-4">
         <div class="row">
             <div class="col-lg-6  mt-5">
                 <div class="card mb-4">
                     <div class="card-body">
+                        <h3>User Details</h3>
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Full Name</p>
@@ -45,6 +47,7 @@
                         </div>
                         <hr>
                         {{-- relation ship start --}}
+
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Address</p>
@@ -89,13 +92,14 @@
             <div class="col-lg-6 mt-5">
 
                 <table class="table">
-                    <h5>Orders</h5>
-                    <h3>This is the list of user Orders </h3>
+
                     <thead>
+                        <h3>User Orders</h3>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Price</th>
                             <th scope="col">status</th>
+                            <th scope="col">placed at</th>
 
                         </tr>
                     </thead>
@@ -103,8 +107,9 @@
                         @foreach($user->orders as $orders)
                         <tr>
                             <th scope="row">{{$orders->order_id}}</th>
-                            <td>{{$orders->price}}</td>
+                            <td>{{number_format($orders->price,2)}}</td>
                             <td>{{$orders->status_text}}</td>
+                            <td>{{$orders->created_at}}</td>
 
                         </tr>
                         @endforeach

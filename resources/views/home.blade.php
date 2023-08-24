@@ -29,6 +29,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Orders</th>
                     {{-- <th scope="col">Address</th>
                     <th scope="col">State</th> --}}
                     <th class="text-right" scope="col">Actions</th>
@@ -40,6 +41,7 @@
                     <th scope="row">{{$user->firstItem() + $loop->index}}</th>
                     <td>{{$users->name}}</td>
                     <td>{{$users->email}}</td>
+                    <td>{{$users->orders_count}}</td>
                     {{-- relation ship hasOne --}}
                     {{-- <td>{{$users->address->address_line_1}}</td>
                     <td>{{$users->address->state}}</td> --}}
