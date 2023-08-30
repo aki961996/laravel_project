@@ -22,6 +22,7 @@ class LoginController
       } else {
          return redirect()->route('login')->with('message', 'Login Invalid');
       }
+
    }
    public function doLogout()
    {

@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Models\UserAddress;
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -96,7 +97,7 @@ class User extends Authenticatable
     }
 
 
-    //etth  oru coulum koodey add akal ann
+    //etth  oru coulum koodey add akal ann // accser
     public function getDateOfBirthFormatedAttribute()
     {
         return date('d-m-Y', strtotime($this->date_of_birth));

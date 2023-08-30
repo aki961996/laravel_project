@@ -13,6 +13,7 @@ use Illuminate\Http\StorePostRequest;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeEmail;
 use App\Models\Order;
+use Attribute;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -81,10 +82,12 @@ class frondEndController extends Controller
 
         ]);
 
+
         // Mail::to($user->email)
         //     // ->cc('sajinjohn.bharathi@gmail.com')
         //     ->send(new WelcomeEmail($user));
         // // return ($user);
+        //events trigger
         UserCreatedEvent::dispatch($user);
         return redirect()->route('home')->with('success', 'user added successfully');
     }

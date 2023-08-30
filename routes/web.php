@@ -6,6 +6,11 @@ use App\Http\Controllers\TodoController;
 use App\Http\Controllers\BorrowerController;
 use App\Http\Controllers\LoginController;
 
+//learning demo
+use App\Http\Controllers\DemoController;
+
+
+
 
 
 
@@ -111,3 +116,7 @@ Route::middleware(['login_verified'])->group(function () {
 
 //test route
 Route::get('q', [TodoController::class, 'qu']);
+
+//demo for learning
+Route::get('demoData', [DemoController::class, 'demo'])->name('demo');
+Route::get('emailData', [DemoController::class, 'emailData'])->name('emData');

@@ -16,7 +16,6 @@ class UserEventListener
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -26,8 +25,8 @@ class UserEventListener
     {
         // info($event->user);
         Mail::to($event->user->email)
-            ->cc('aaa.@gmail.com')
-            ->bcc('xyz@gmail.com')->send(new WelcomeEmail($event->user, 'drfdrf'));
+            //->cc('aaa.@gmail.com')
+            ->bcc('akhileshv.techmaven@gmail.com')->send(new WelcomeEmail($event->user, 'drfdrf'));
 
         // return ($user);
     }
